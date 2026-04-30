@@ -40,6 +40,7 @@ $nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
             </video>
         </section>
     </main>
+    <?php include 'php/footer.php'; ?>
     <script src="js/header-scroll.js"></script>
 </body>
 </html>

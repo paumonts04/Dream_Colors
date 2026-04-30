@@ -1,6 +1,15 @@
 <?php
 require_once __DIR__ . '/conexion.php';
 
+$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+$headerBaseUrl = preg_replace('#/php(?:/.*)?/[^/]*$#', '', $scriptName);
+
+if ($headerBaseUrl === null || $headerBaseUrl === $scriptName) {
+    $headerBaseUrl = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+}
+
+$headerBaseUrl = $headerBaseUrl === '' || $headerBaseUrl === '.' ? '' : $headerBaseUrl;
+
 $categoriasServicios = [];
 $sqlServicios = "
     SELECT
@@ -37,7 +46,7 @@ if ($resultadoServicios) {
 ?>
 
 <header class="site-header">
-    <a class="site-logo" href="index.php" aria-label="Dream Colors inicio">Dream Colors</a>
+    <a class="site-logo" href="<?php echo htmlspecialchars($headerBaseUrl); ?>/index.php" aria-label="Dream Colors inicio">Dream Colors</a>
 
     <form class="site-search" action="#" method="get" role="search">
         <input type="search" name="buscar" placeholder="Buscar" aria-label="Buscar">
@@ -47,9 +56,9 @@ if ($resultadoServicios) {
         <button class="nav-link services-toggle" type="button" aria-expanded="false" aria-controls="services-menu">
             Servicios
         </button>
-        <a href="#precios">Precios</a>
-        <a href="#promociones">Promociones</a>
-        <a href="#sobre-dream-colors">Sobre Dream Colors</a>
+        <a href="<?php echo htmlspecialchars($headerBaseUrl); ?>/index.php#precios">Precios</a>
+        <a href="<?php echo htmlspecialchars($headerBaseUrl); ?>/index.php#promociones">Promociones</a>
+        <a href="<?php echo htmlspecialchars($headerBaseUrl); ?>/index.php#sobre-dream-colors">Sobre Dream Colors</a>
     </nav>
 
     <section class="services-menu" id="services-menu" aria-label="Servicios">
@@ -59,9 +68,9 @@ if ($resultadoServicios) {
                     <h2><?php echo htmlspecialchars($categoria['tipo']); ?></h2>
 
                     <?php if (count($categoria['servicios']) > 0): ?>
-                        <?php foreach ($categoria['servicios'] as $servicio): ?>
-                            <a href="#servicio-<?php echo $servicio['id']; ?>">
-                                <?php echo htmlspecialchars($servicio['nombre']); ?>
+                        <?php foreach ($categoria['servicios'] as $servicioMenu): ?>
+                            <a href="<?php echo htmlspecialchars($headerBaseUrl); ?>/php/servicio.php?id=<?php echo $servicioMenu['id']; ?>">
+                                <?php echo htmlspecialchars($servicioMenu['nombre']); ?>
                             </a>
                         <?php endforeach; ?>
                     <?php else: ?>
