@@ -1,5 +1,5 @@
 <?php
-require_once 'php/conexion.php';
+require_once __DIR__ . '/conexion.php';
 
 $categoriasServicios = [];
 $sqlServicios = "
