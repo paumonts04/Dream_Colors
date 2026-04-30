@@ -27,6 +27,19 @@ $nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
                 Tu navegador no puede reproducir este video.
             </video>
         </section>
+
+        <section class="split-videos" id="servicios" aria-label="Videos de servicios">
+            <video class="split-video" autoplay muted loop playsinline preload="metadata">
+                <source src="videos/liso.webm" type="video/webm">
+                Tu navegador no puede reproducir este video.
+            </video>
+
+            <video class="split-video" autoplay muted loop playsinline preload="metadata">
+                <source src="videos/planxa.webm" type="video/webm">
+                Tu navegador no puede reproducir este video.
+            </video>
+        </section>
     </main>
+    <script src="js/header-scroll.js"></script>
 </body>
 </html>
