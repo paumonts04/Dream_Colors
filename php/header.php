@@ -9,6 +9,11 @@ if ($headerBaseUrl === null || $headerBaseUrl === $scriptName) {
 }
 
 $headerBaseUrl = $headerBaseUrl === '' || $headerBaseUrl === '.' ? '' : $headerBaseUrl;
+$headerClasses = ['site-header'];
+
+if (($headerBanner ?? '') === 'cabello') {
+    $headerClasses[] = 'site-header-cabello';
+}
 
 $categoriasServicios = [];
 $sqlServicios = "
@@ -45,7 +50,7 @@ if ($resultadoServicios) {
 }
 ?>
 
-<header class="site-header">
+<header class="<?php echo htmlspecialchars(implode(' ', $headerClasses)); ?>">
     <a class="site-logo" href="<?php echo htmlspecialchars($headerBaseUrl); ?>/index.php" aria-label="Dream Colors inicio">Dream Colors</a>
 
     <form class="site-search" action="#" method="get" role="search">

@@ -42,6 +42,13 @@ body.home-body {
     transition: background 0.45s ease, box-shadow 0.25s ease;
 }
 
+.site-header-cabello:not(.is-scrolled):not(.has-open-menu) {
+    padding-bottom: 58px;
+    background:
+        linear-gradient(rgba(31, 27, 24, 0.34), rgba(31, 27, 24, 0.18)),
+        url("../img/Banner-Cabello") center 42% / cover no-repeat;
+}
+
 .site-header.is-scrolled,
 .site-header.has-open-menu {
     box-shadow: 0 12px 32px rgba(43, 37, 34, 0.08);
@@ -365,6 +372,10 @@ body.home-body {
         padding: 18px;
         gap: 12px;
         grid-template-columns: 1fr;
+    }
+
+    .site-header-cabello:not(.is-scrolled):not(.has-open-menu) {
+        padding-bottom: 42px;
     }
 
     .site-logo {

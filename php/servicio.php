@@ -35,7 +35,8 @@ $duracionServicio = $servicio['duracion'] ?? null;
 $precioServicio = (float) ($servicio['precio'] ?? 0);
 $videoServicio = trim((string) ($servicio['video'] ?? ''));
 $imagenServicio = trim((string) ($servicio['imagen'] ?? ''));
-$reservaPath = __DIR__ . '/reserva/reserva.php';
+$reservaUrl = 'reserva.php?id_servicio=' . (int) $servicio['id'];
+$headerBanner = strtolower($categoriaServicio) === 'cabello' ? 'cabello' : '';
 ?>
 
 <!DOCTYPE html>
@@ -75,19 +76,9 @@ $reservaPath = __DIR__ . '/reserva/reserva.php';
             <span><?= number_format($precioServicio, 2) ?> EUR</span>
         </div>
 
-        <?php if (isset($_SESSION['usuario_id']) && file_exists($reservaPath)): ?>
-            <a href="reserva/reserva.php?id_servicio=<?= (int) $servicio['id'] ?>" class="btn-reservar">
-                Reservar cita
-            </a>
-        <?php elseif (isset($_SESSION['usuario_id'])): ?>
-            <span class="btn-reservar btn-reservar-disabled">
-                Reserva no disponible todavia
-            </span>
-        <?php else: ?>
-            <a href="login.php?redirect=servicio.php?id=<?= (int) $servicio['id'] ?>" class="btn-reservar">
-                Inicia sesion para reservar
-            </a>
-        <?php endif; ?>
+        <a href="<?= htmlspecialchars($reservaUrl) ?>" class="btn-reservar">
+            Reservar cita
+        </a>
     </div>
 </main>
 

@@ -1,11 +1,6 @@
 <?php
 require_once 'php/conexion.php';
 
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: php/login.php");
-    exit();
-}
-
 $nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
 ?>
 

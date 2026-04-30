@@ -1,8 +1,14 @@
 <?php
 require_once 'conexion.php';
 
+$redirect = $_GET['redirect'] ?? $_POST['redirect'] ?? '../index.php';
+
+if (preg_match('#^https?://#i', $redirect) || strpos($redirect, '//') === 0) {
+    $redirect = '../index.php';
+}
+
 if (isset($_SESSION['usuario_id'])) {
-    header("Location: ../index.php");
+    header("Location: " . $redirect);
     exit();
 }
 
@@ -27,7 +33,7 @@ if (isset($_POST['ingresar'])) {
                 $_SESSION['nombre'] = $datos['nombre'];
 
                 $stmt->close();
-                header("Location: ../index.php");
+                header("Location: " . $redirect);
                 exit();
             }
 
@@ -66,6 +72,7 @@ if (isset($_POST['ingresar'])) {
 <?php endif; ?>
 
 <form action="login.php" method="POST">
+<input type="hidden" name="redirect" value="<?php echo htmlspecialchars($redirect); ?>">
 <div class="form-group">
 <label for="nombre">Nombre de Usuario</label>
 <input type="text" id="nombre" name="nombre" placeholder="Tu usuario..." required>
