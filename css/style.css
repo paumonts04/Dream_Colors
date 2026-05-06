@@ -46,7 +46,7 @@ body.home-body {
     padding-bottom: 58px;
     background:
         linear-gradient(rgba(31, 27, 24, 0.34), rgba(31, 27, 24, 0.18)),
-        url("../img/Banner-Cabello") center 42% / cover no-repeat;
+        url("../img/Banner-Cabello.webp") center 42% / cover no-repeat;
 }
 
 .site-header.is-scrolled,
