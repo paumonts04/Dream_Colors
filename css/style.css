@@ -1,0 +1,970 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ================================================================
+   HOME
+   ================================================================ */
+body.home-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f2ee;
+    color: #2b2522;
+}
+
+.home-wrapper {
+    min-height: 100vh;
+    display: grid;
+    padding: 0;
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.site-header {
+    --header-bg-opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    justify-items: center;
+    gap: 12px;
+    padding: 24px 24px 16px;
+    background: rgba(255, 255, 255, var(--header-bg-opacity));
+    text-align: center;
+    transition: background 0.45s ease, box-shadow 0.25s ease;
+}
+
+.site-header-cabello:not(.is-scrolled):not(.has-open-menu) {
+    padding-bottom: 58px;
+    background:
+        linear-gradient(rgba(31, 27, 24, 0.34), rgba(31, 27, 24, 0.18)),
+        url("../img/Banner-Cabello.webp") center 42% / cover no-repeat;
+}
+
+.site-header-capilar:not(.is-scrolled):not(.has-open-menu) {
+    padding-bottom: 58px;
+    background:
+        linear-gradient(rgba(31, 27, 24, 0.34), rgba(31, 27, 24, 0.18)),
+        url("../img/capilar.webp") center 42% / cover no-repeat;
+}
+
+.site-header-facial:not(.is-scrolled):not(.has-open-menu) {
+    padding-bottom: 58px;
+    background:
+        linear-gradient(rgba(31, 27, 24, 0.34), rgba(31, 27, 24, 0.18)),
+        url("../img/facial.webp") center 42% / cover no-repeat;
+}
+
+.site-header.is-scrolled,
+.site-header.has-open-menu {
+    box-shadow: 0 12px 32px rgba(43, 37, 34, 0.08);
+}
+
+.site-logo {
+    grid-column: 2;
+    color: #ffffff;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    text-decoration: none;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.32);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.site-nav {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.site-search {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin-top: 10px;
+    width: min(100%, 260px);
+}
+
+.site-search input {
+    width: 100%;
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font: inherit;
+    outline: none;
+    text-align: left;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.site-search input::placeholder {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.site-search input:focus {
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.site-nav a,
+.services-toggle {
+    color: #ffffff;
+    border: 0;
+    background: transparent;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.site-header.is-scrolled .site-logo,
+.site-header.is-scrolled .site-nav a,
+.site-header.is-scrolled .services-toggle,
+.site-header.has-open-menu .site-logo,
+.site-header.has-open-menu .site-nav a,
+.site-header.has-open-menu .services-toggle {
+    color: #1f1b18;
+    text-shadow: none;
+}
+
+.services-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 18px 36px rgba(43, 37, 34, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+    pointer-events: none;
+    transition: clip-path 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, visibility 0.65s ease;
+}
+
+.services-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0);
+    pointer-events: auto;
+}
+
+.site-header.has-open-menu {
+    --header-bg-opacity: 1;
+}
+
+.services-menu-inner {
+    width: min(100%, 980px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 24px;
+    text-align: left;
+}
+
+.services-column h2 {
+    margin: 0 0 12px;
+    color: #1f1b18;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.services-column a,
+.services-empty {
+    display: block;
+    margin: 8px 0;
+    color: #4f433c;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.services-column a:hover {
+    color: #9a6f54;
+}
+
+.site-header.is-scrolled .site-search input {
+    border-color: rgba(31, 27, 24, 0.24);
+    background: rgba(31, 27, 24, 0.04);
+    color: #1f1b18;
+}
+
+.site-header.is-scrolled .site-search input::placeholder {
+    color: rgba(31, 27, 24, 0.58);
+}
+
+.site-header.is-scrolled .site-search input:focus {
+    border-color: rgba(31, 27, 24, 0.48);
+    background: rgba(31, 27, 24, 0.07);
+}
+
+/* ================================================================
+   HERO / VÍDEOS
+   ================================================================ */
+.hero-stage {
+    display: grid;
+    place-items: center;
+    min-height: 0;
+}
+
+.hero-video {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+    background: #ddd2ca;
+}
+
+.split-videos {
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    background: #f7f2ee;
+}
+
+.split-video {
+    display: block;
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+    background: #ddd2ca;
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.site-footer {
+    background: #1f1b18;
+    color: rgba(255, 255, 255, 0.78);
+    padding: 42px 24px;
+}
+
+.site-footer-inner {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.footer-brand a {
+    color: #ffffff;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-brand p,
+.footer-contact span {
+    margin: 10px 0 0;
+    line-height: 1.6;
+}
+
+.footer-links,
+.footer-contact {
+    display: grid;
+    gap: 10px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+/* ================================================================
+   SERVICIO DETALLE — Layout editorial split 50/50
+   ================================================================ */
+body.servicio-body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f2ee;
+    color: #2b2522;
+}
+
+.servicio-detalle {
+    display: grid;
+    grid-template-columns: 46% 1fr;
+    min-height: 100vh;
+    background: #f7f2ee;
+    padding-top: 90px; /* espacio bajo el header fijo */
+}
+
+/* ── Panel izquierdo: imagen con margen del header ── */
+.servicio-media-wrapper {
+    position: sticky;
+    top: 90px;
+    height: calc(100vh - 90px);
+    overflow: hidden;
+    background: #ddd2ca;
+    border-radius: 0 12px 12px 0;
+}
+
+.servicio-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.servicio-media-pos-center { object-position: center center; }
+.servicio-media-pos-top    { object-position: center top; }
+
+/* Velo lateral muy suave para que no haya un corte duro */
+.servicio-media-velo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        transparent 70%,
+        rgba(247, 242, 238, 0.35) 100%
+    );
+    pointer-events: none;
+}
+
+/* Placeholder si no hay imagen ni vídeo */
+.servicio-media-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    background: #ece4dd;
+    color: #9a6f54;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+/* ── Panel derecho: contenido centrado verticalmente ── */
+.servicio-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 90px);
+    padding: 48px 64px 64px;
+}
+
+/* Línea + etiqueta de categoría */
+.servicio-categoria {
+    display: block;
+    margin-bottom: 20px;
+    color: #9a6f54;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.servicio-categoria::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: #9a6f54;
+    margin-bottom: 14px;
+}
+
+/* Título */
+.servicio-info h1 {
+    margin: 0 0 24px;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: clamp(2.2rem, 3.2vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: #1f1b18;
+}
+
+/* Descripción */
+.servicio-descripcion {
+    max-width: 440px;
+    margin: 0 0 28px;
+    color: #5c504a;
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+/* Separador decorativo */
+.servicio-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(154, 111, 84, 0.2);
+    margin: 0 0 28px;
+}
+
+/* Badges de duración y precio */
+.servicio-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 36px;
+}
+
+.meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border: 1px solid rgba(154, 111, 84, 0.28);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #4f433c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(4px);
+}
+
+.meta-precio {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1f1b18;
+    border-color: rgba(31, 27, 24, 0.2);
+    padding: 8px 22px;
+}
+
+/* Botón reservar */
+.btn-reservar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+    min-height: 52px;
+    padding: 0 32px;
+    border-radius: 999px;
+    background: #1f1b18;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn-reservar svg {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-reservar:hover {
+    background: #9a6f54;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(154, 111, 84, 0.3);
+}
+
+.btn-reservar:hover svg {
+    transform: translateX(4px);
+}
+
+.btn-reservar-disabled {
+    opacity: 0.62;
+    pointer-events: none;
+}
+
+/* ================================================================
+   RESERVA
+   ================================================================ */
+.reserva-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 140px 24px 80px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reserva-container h2 {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1f1b18;
+    margin-bottom: 32px;
+}
+
+.reserva-servicio-elegido {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    border: 1px solid rgba(154, 111, 84, 0.2);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    margin-bottom: 36px;
+    backdrop-filter: blur(4px);
+}
+
+.reserva-servicio-elegido img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.reserva-servicio-info h3 {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f1b18;
+    margin: 0 0 4px;
+}
+
+.reserva-categoria {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9a6f54;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.reserva-servicio-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #5c504a;
+}
+
+.paso {
+    margin-bottom: 32px;
+}
+
+.paso h3 {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f1b18;
+    margin-bottom: 16px;
+}
+
+.paso input[type="date"] {
+    padding: 12px 18px;
+    border: 1px solid rgba(154, 111, 84, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+    color: #2b2522;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.paso input[type="date"]:focus {
+    border-color: #9a6f54;
+    box-shadow: 0 0 0 3px rgba(154, 111, 84, 0.12);
+}
+
+#horas-disponibles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-hora {
+    padding: 10px 20px;
+    border: 1px solid rgba(154, 111, 84, 0.3);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #4f433c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.btn-hora:hover {
+    border-color: #9a6f54;
+    background: rgba(154, 111, 84, 0.08);
+}
+
+.btn-hora.seleccionado {
+    background: #1f1b18;
+    color: #fff;
+    border-color: #1f1b18;
+}
+
+.reserva-resumen {
+    padding: 20px 24px;
+    border: 1px solid rgba(154, 111, 84, 0.2);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
+    line-height: 2;
+    font-size: 0.95rem;
+    color: #2b2522;
+}
+
+.btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(31, 27, 24, 0.2);
+    background: transparent;
+    color: #4f433c;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 12px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-cancelar:hover {
+    background: rgba(31, 27, 24, 0.05);
+    border-color: rgba(31, 27, 24, 0.35);
+}
+
+.reserva-exito {
+    text-align: center;
+    padding: 48px 24px;
+    border: 1px solid rgba(154, 111, 84, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.reserva-exito h3 {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f1b18;
+    margin-bottom: 12px;
+}
+
+/* ================================================================
+   LOGIN / REGISTRO
+   ================================================================ */
+body.login-body,
+body.registro-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #2f2a28;
+}
+
+body.login-body {
+    background:
+        linear-gradient(rgba(246, 241, 236, 0.88), rgba(246, 241, 236, 0.88)),
+        linear-gradient(135deg, #f8f3ef 0%, #efe5dc 50%, #e4d3c4 100%);
+}
+
+body.registro-body {
+    background:
+        linear-gradient(rgba(246, 241, 236, 0.9), rgba(246, 241, 236, 0.9)),
+        linear-gradient(135deg, #f7f1eb 0%, #eee1d6 55%, #e3cfbe 100%);
+}
+
+.form-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 430px;
+    padding: 40px 32px 30px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(120, 94, 74, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(87, 66, 52, 0.12);
+    backdrop-filter: blur(6px);
+}
+
+.form-container h2 {
+    margin: 0 0 10px;
+    font-size: 1.9rem;
+    font-weight: 600;
+    text-align: center;
+    color: #332923;
+    letter-spacing: 0.02em;
+}
+
+.form-container > p {
+    margin: 0 0 28px;
+    text-align: center;
+    color: #7a6b62;
+    font-size: 0.98rem;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #4f433c;
+}
+
+.form-group input {
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 15px;
+    border: 1px solid #d8c9bd;
+    border-radius: 12px;
+    background: #fffdfa;
+    color: #2f2a28;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #b68a6a;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(182, 138, 106, 0.15);
+}
+
+.input-password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.password-eye {
+    width: 22px;
+    opacity: 0.68;
+}
+
+.input-password-container input {
+    padding-right: 50px;
+}
+
+.btn-submit {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #b78a6b 0%, #9a6f54 100%);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(154, 111, 84, 0.3);
+}
+
+.form-alert {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 0.92rem;
+}
+
+.form-alert-error {
+    color: #9f2f39;
+    background: #fff4f4;
+    border: 1px solid #ebc5c8;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 900px) {
+    /* Servicio: apilado vertical en tablet */
+    .servicio-detalle {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 80px;
+    }
+
+    .servicio-media-wrapper {
+        position: relative;
+        top: 0;
+        height: 50vw;
+        min-height: 240px;
+        max-height: 420px;
+        border-radius: 0;
+    }
+
+    .servicio-info {
+        min-height: auto;
+        padding: 40px 36px 60px;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Header */
+    .site-header {
+        padding: 18px;
+        gap: 12px;
+        grid-template-columns: 1fr;
+    }
+
+    .site-header-cabello:not(.is-scrolled):not(.has-open-menu) {
+        padding-bottom: 42px;
+    }
+
+    .site-logo {
+        grid-column: 1;
+        font-size: 2rem;
+    }
+
+    .site-nav {
+        grid-column: 1;
+        gap: 10px 14px;
+    }
+
+    .site-search {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: center;
+        margin-top: 0;
+        width: min(100%, 280px);
+    }
+
+    .site-nav a,
+    .services-toggle {
+        font-size: 0.74rem;
+    }
+
+    .services-menu {
+        padding: 18px;
+    }
+
+    /* Vídeos split */
+    .split-videos {
+        flex-direction: column;
+    }
+
+    .split-video {
+        width: 100%;
+        height: 50vh;
+    }
+
+    /* Footer */
+    .site-footer-inner {
+        grid-template-columns: 1fr;
+    }
+
+    /* Servicio */
+    .servicio-media-wrapper {
+        height: 60vw;
+        min-height: 200px;
+    }
+
+    .servicio-info {
+        padding: 28px 20px 56px;
+    }
+
+    .servicio-info h1 {
+        font-size: clamp(1.9rem, 8vw, 2.6rem);
+    }
+
+    .btn-reservar {
+        width: 100%;
+        justify-content: center;
+        min-height: 56px;
+    }
+
+    /* Reserva */
+    .reserva-container {
+        padding: 120px 18px 60px;
+    }
+
+    .reserva-servicio-elegido {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Login / Registro */
+    .form-wrapper {
+        align-items: flex-start;
+        padding: 40px 10px 10px;
+    }
+
+    .form-container {
+        width: 95%;
+        max-width: 100%;
+        padding: 35px 20px;
+        border-radius: 20px;
+        font-size: 1.1rem;
+    }
+
+    .form-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-group input {
+        height: 60px;
+        font-size: 1.1rem;
+    }
+
+    .btn-submit {
+        height: 60px;
+        font-size: 1.1rem;
+        margin-top: 20px;
+    }
+
+    .form-footer p {
+        font-size: 1rem;
+        line-height: 2;
+    }
+}
